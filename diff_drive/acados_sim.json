@@ -1,15 +1,15 @@
 {
-    "acados_include_path": "/home/john/acados/include",
-    "acados_lib_path": "/home/john/acados/lib",
-    "code_export_directory": "/home/john/repos/mpc_tutorial/cartpole/c_generated_code",
+    "acados_include_path": "/home/john/repos/acados/include",
+    "acados_lib_path": "/home/john/repos/acados/lib",
+    "code_export_directory": "/home/john/repos/mpc_tutorial/diff_drive/c_generated_code",
     "cython_include_dirs": [
         "/home/john/.local/lib/python3.8/site-packages/numpy/core/include",
         "/usr/include/python3.8"
     ],
     "dims": {
         "np": 0,
-        "nu": 1,
-        "nx": 4,
+        "nu": 2,
+        "nx": 5,
         "nz": 0
     },
     "model": {
@@ -52,37 +52,39 @@
         "dyn_impl_dae_fun": null,
         "dyn_impl_dae_fun_jac": null,
         "dyn_impl_dae_jac": null,
-        "f_expl_expr": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegiaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaacaaaaaaaghbdegpcaaaaaaaaaaaaaagaaaaaaaegehigfgehbgegeaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachmhebokhebokhelplegnaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgchcaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachcdiamkmbkfegpopdegoaaaaaaaaaaaaaaacheaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaabaaaaaaageegcaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjbppdegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjjlpdchkaaaaaaaaaaaaaaachkaaaaaaaaaaaaaaaegeaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachdaaaaaaaaaaaaaaachkaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachoaaaaaaaaaaaaaaachkaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachdkfegldpnpejfcaechfaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjjopdchebaaaaaaaaaaaaaa",
-        "f_impl_expr": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegiaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaagaaaaaaaihbdpfegpgehegpcaaaaaaaaaaaaaacaaaaaaaghbdegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaajaaaaaaaehigfgehbgpfegpgehegpcaaaaaaaaaaaaaagaaaaaaaegehigfgehbgegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaagaaaaaaaghbdpfegpgehegeaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachmhebokhebokhelplegnaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgchfaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachcdiamkmbkfegpopdegoaaaaaaaaaaaaaaachjaaaaaaaaaaaaaaachkaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaabaaaaaaageegcaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjbppdegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjjlpdchpaaaaaaaaaaaaaaachpaaaaaaaaaaaaaaaegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaakaaaaaaaegehigfgehbgpfegpgehegeaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachiaaaaaaaaaaaaaaachpaaaaaaaaaaaaaaachkaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachdbaaaaaaaaaaaaaachpaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachdkfegldpnpejfcaechkaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachkjjjjjjjjjjjjopdchjbaaaaaaaaaaaaaa",
+        "f_expl_expr": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegjaaaaaaaaaaaaaaafaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachmehdjibeagfoakpdegoaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaaiaaaaaaaahigjgbdpfegpgehegpcaaaaaaaaaaaaaaiaaaaaaaahigjgcdpfegpgehegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachbaaaaaaaaaaaaaaaegnaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaaegcaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaachgaaaaaaaaaaaaaaaegfaaaaaaaaaaaaaaaegeaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachbaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaachfaaaaaaaaaaaaaaachgaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachlhebokhebokhelpdegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhbdegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhcd",
+        "f_impl_expr": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegjaaaaaaaaaaaaaaafaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaihpfegpgehegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachmehdjibeagfoakpdegoaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaaiaaaaaaaahigjgbdpfegpgehegpcaaaaaaaaaaaaaaiaaaaaaaahigjgcdpfegpgehegcaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaajhpfegpgehegdaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaaegnaaaaaaaaaaaaaaachdaaaaaaaaaaaaaaaegcaaaaaaaaaaaaaaachgaaaaaaaaaaaaaaachhaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaajaaaaaaaehigfgehbgpfegpgehegeaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaachcaaaaaaaaaaaaaaaegbaaaaaaaaaaaaaaachgaaaaaaaaaaaaaaachhaaaaaaaaaaaaaaaegmcaaaaaaaaaaaaaachlhebokhebokhelpdegcaaaaaaaaaaaaaaachgaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhbdegcaaaaaaaaaaaaaaachhaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhcd",
         "gnsf": {
             "nontrivial_f_LO": 1,
             "purely_linear": 0
         },
-        "name": "pendulum_ode",
+        "name": "diff_drive",
         "nu_original": null,
         "p": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "t": [],
         "t0": null,
         "t_label": "$t$ [s]",
-        "u": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegfaaaaaaaaaaaaaaabaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaabaaaaaaage",
+        "u": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaeggaaaaaaaaaaaaaaacaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhbdegpcaaaaaaaaaaaaaaeaaaaaaaehbgfhcd",
         "u_labels": [
-            "$F$"
+            "$\\tau_1$ [N]",
+            "$\\tau_2$ [N]"
         ],
-        "x": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegiaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaacaaaaaaaihbdegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgegpcaaaaaaaaaaaaaacaaaaaaaghbdegpcaaaaaaaaaaaaaagaaaaaaaegehigfgehbg",
+        "x": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegjaaaaaaaaaaaaaaafaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaabaaaaaaaihegpcaaaaaaaaaaaaaabaaaaaaajhegpcaaaaaaaaaaaaaafaaaaaaaehigfgehbgegpcaaaaaaaaaaaaaaeaaaaaaaahigjgbdegpcaaaaaaaaaaaaaaeaaaaaaaahigjgcd",
         "x_labels": [
             "$x$ [m]",
+            "$y$ [m]",
             "$\\theta$ [rad]",
-            "$v$ [m]",
-            "$\\dot{\\theta}$ [rad/s]"
+            "$\\phi_1$ [rad]",
+            "$\\phi_2$ [rad]"
         ],
-        "xdot": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegiaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaagaaaaaaaihbdpfegpgehegpcaaaaaaaaaaaaaajaaaaaaaehigfgehbgpfegpgehegpcaaaaaaaaaaaaaagaaaaaaaghbdpfegpgehegpcaaaaaaaaaaaaaakaaaaaaaegehigfgehbgpfegpgeh",
+        "xdot": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegjaaaaaaaaaaaaaaafaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaacaaaaaaaaaaaaaaadaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaafaaaaaaaaaaaaaaaegpcaaaaaaaaaaaaaafaaaaaaaihpfegpgehegpcaaaaaaaaaaaaaafaaaaaaajhpfegpgehegpcaaaaaaaaaaaaaajaaaaaaaehigfgehbgpfegpgehegpcaaaaaaaaaaaaaaiaaaaaaaahigjgbdpfegpgehegpcaaaaaaaaaaaaaaiaaaaaaaahigjgcdpfegpgeh",
         "z": "jhpnnagiieahaaaadaaaaaaaaaaaaaaaaaegdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
     "parameter_values": [],
     "problem_class": "SIM",
     "shared_lib_ext": ".so",
     "solver_options": {
-        "Tsim": 0.01,
+        "Tsim": 0.1,
         "collocation_type": "GAUSS_RADAU_IIA",
         "ext_fun_compile_flags": "-O2",
         "integrator_type": "IRK",

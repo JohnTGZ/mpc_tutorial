@@ -63,7 +63,7 @@
 #define PENDULUM_ODE_NY0    5
 #define PENDULUM_ODE_NY     5
 #define PENDULUM_ODE_NYN    4
-#define PENDULUM_ODE_N      40
+#define PENDULUM_ODE_N      20
 #define PENDULUM_ODE_NH     0
 #define PENDULUM_ODE_NHN    0
 #define PENDULUM_ODE_NH0    0
@@ -96,30 +96,30 @@ typedef struct pendulum_ode_solver_capsule
     /* external functions */
     // dynamics
 
-    external_function_param_casadi *impl_dae_fun;
-    external_function_param_casadi *impl_dae_fun_jac_x_xdot_z;
-    external_function_param_casadi *impl_dae_jac_x_xdot_u_z;
+    external_function_external_param_casadi *impl_dae_fun;
+    external_function_external_param_casadi *impl_dae_fun_jac_x_xdot_z;
+    external_function_external_param_casadi *impl_dae_jac_x_xdot_u_z;
 
 
 
 
     // cost
 
-    external_function_param_casadi *cost_y_fun;
-    external_function_param_casadi *cost_y_fun_jac_ut_xt;
-    external_function_param_casadi *cost_y_hess;
+    external_function_external_param_casadi *cost_y_fun;
+    external_function_external_param_casadi *cost_y_fun_jac_ut_xt;
+    external_function_external_param_casadi *cost_y_hess;
 
 
 
-    external_function_param_casadi cost_y_0_fun;
-    external_function_param_casadi cost_y_0_fun_jac_ut_xt;
-    external_function_param_casadi cost_y_0_hess;
+    external_function_external_param_casadi cost_y_0_fun;
+    external_function_external_param_casadi cost_y_0_fun_jac_ut_xt;
+    external_function_external_param_casadi cost_y_0_hess;
 
 
 
-    external_function_param_casadi cost_y_e_fun;
-    external_function_param_casadi cost_y_e_fun_jac_ut_xt;
-    external_function_param_casadi cost_y_e_hess;
+    external_function_external_param_casadi cost_y_e_fun;
+    external_function_external_param_casadi cost_y_e_fun_jac_ut_xt;
+    external_function_external_param_casadi cost_y_e_hess;
 
 
     // constraints

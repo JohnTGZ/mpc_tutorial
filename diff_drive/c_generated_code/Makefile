@@ -36,37 +36,28 @@
 
 # model
 MODEL_SRC=
-MODEL_SRC+= pendulum_ode_model/pendulum_ode_impl_dae_fun.c
-MODEL_SRC+= pendulum_ode_model/pendulum_ode_impl_dae_fun_jac_x_xdot_z.c
-MODEL_SRC+= pendulum_ode_model/pendulum_ode_impl_dae_jac_x_xdot_u_z.c
+MODEL_SRC+= diff_drive_model/diff_drive_impl_dae_fun.c
+MODEL_SRC+= diff_drive_model/diff_drive_impl_dae_fun_jac_x_xdot_z.c
+MODEL_SRC+= diff_drive_model/diff_drive_impl_dae_jac_x_xdot_u_z.c
 MODEL_OBJ := $(MODEL_SRC:.c=.o)
 
 # optimal control problem - mostly CasADi exports
 OCP_SRC=
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_0_fun.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_0_fun_jac_ut_xt.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_0_hess.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_fun.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_fun_jac_ut_xt.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_hess.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_e_fun.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_e_fun_jac_ut_xt.c
-OCP_SRC+= pendulum_ode_cost/pendulum_ode_cost_y_e_hess.c
 
-OCP_SRC+= acados_solver_pendulum_ode.c
+OCP_SRC+= acados_solver_diff_drive.c
 OCP_OBJ := $(OCP_SRC:.c=.o)
 
 # for sim solver
-SIM_SRC= acados_sim_solver_pendulum_ode.c
+SIM_SRC= acados_sim_solver_diff_drive.c
 SIM_OBJ := $(SIM_SRC:.c=.o)
 
 # for target example
-EX_SRC= main_pendulum_ode.c
+EX_SRC= main_diff_drive.c
 EX_OBJ := $(EX_SRC:.c=.o)
 EX_EXE := $(EX_SRC:.c=)
 
 # for target example_sim
-EX_SIM_SRC= main_sim_pendulum_ode.c
+EX_SIM_SRC= main_sim_diff_drive.c
 EX_SIM_OBJ := $(EX_SIM_SRC:.c=.o)
 EX_SIM_EXE := $(EX_SIM_SRC:.c=)
 
@@ -79,8 +70,8 @@ OBJ+= $(OCP_OBJ)
 EXTERNAL_DIR=
 EXTERNAL_LIB=
 
-INCLUDE_PATH = /home/john/acados/include
-LIB_PATH = /home/john/acados/lib
+INCLUDE_PATH = /home/john/repos/acados/include
+LIB_PATH = /home/john/repos/acados/lib
 
 # preprocessor flags for make's implicit rules
 CPPFLAGS+= -I$(INCLUDE_PATH)
@@ -107,8 +98,8 @@ LDLIBS+= -lm
 LDLIBS+= 
 
 # libraries
-LIBACADOS_SOLVER=libacados_solver_pendulum_ode.so
-LIBACADOS_OCP_SOLVER=libacados_ocp_solver_pendulum_ode.so
+LIBACADOS_SOLVER=libacados_solver_diff_drive.so
+LIBACADOS_OCP_SOLVER=libacados_ocp_solver_diff_drive.so
 LIBACADOS_SIM_SOLVER=lib$(SIM_SRC:.c=.so)
 
 # virtual targets
@@ -143,7 +134,7 @@ ocp_cython_c: ocp_shared_lib
 	-o acados_ocp_solver_pyx.c \
 	-I $(INCLUDE_PATH)/../interfaces/acados_template/acados_template \
 	$(INCLUDE_PATH)/../interfaces/acados_template/acados_template/acados_ocp_solver_pyx.pyx \
-	-I /home/john/repos/mpc_tutorial/cartpole/c_generated_code \
+	-I /home/john/repos/mpc_tutorial/diff_drive/c_generated_code \
 
 ocp_cython_o: ocp_cython_c
 	$(CC) $(ACADOS_FLAGS) -c -O2 \
@@ -161,7 +152,7 @@ ocp_cython: ocp_cython_o
 	-o acados_ocp_solver_pyx.so \
 	-Wl,-rpath=$(LIB_PATH) \
 	acados_ocp_solver_pyx.o \
-	$(abspath .)/libacados_ocp_solver_pendulum_ode.so \
+	$(abspath .)/libacados_ocp_solver_diff_drive.so \
 	$(LDFLAGS) $(LDLIBS)
 
 # Sim Cython targets
@@ -170,7 +161,7 @@ sim_cython_c: sim_shared_lib
 	-o acados_sim_solver_pyx.c \
 	-I $(INCLUDE_PATH)/../interfaces/acados_template/acados_template \
 	$(INCLUDE_PATH)/../interfaces/acados_template/acados_template/acados_sim_solver_pyx.pyx \
-	-I /home/john/repos/mpc_tutorial/cartpole/c_generated_code \
+	-I /home/john/repos/mpc_tutorial/diff_drive/c_generated_code \
 
 sim_cython_o: sim_cython_c
 	$(CC) $(ACADOS_FLAGS) -c -O2 \
@@ -188,7 +179,7 @@ sim_cython: sim_cython_o
 	-o acados_sim_solver_pyx.so \
 	-Wl,-rpath=$(LIB_PATH) \
 	acados_sim_solver_pyx.o \
-	$(abspath .)/libacados_sim_solver_pendulum_ode.so \
+	$(abspath .)/libacados_sim_solver_diff_drive.so \
 	$(LDFLAGS) $(LDLIBS)
 
 clean:
@@ -201,13 +192,13 @@ clean_ocp_shared_lib:
 	$(RM) $(OCP_OBJ)
 
 clean_ocp_cython:
-	$(RM) libacados_ocp_solver_pendulum_ode.so
-	$(RM) acados_solver_pendulum_ode.o
+	$(RM) libacados_ocp_solver_diff_drive.so
+	$(RM) acados_solver_diff_drive.o
 	$(RM) acados_ocp_solver_pyx.so
 	$(RM) acados_ocp_solver_pyx.o
 
 clean_sim_cython:
-	$(RM) libacados_sim_solver_pendulum_ode.so
-	$(RM) acados_sim_solver_pendulum_ode.o
+	$(RM) libacados_sim_solver_diff_drive.so
+	$(RM) acados_sim_solver_diff_drive.o
 	$(RM) acados_sim_solver_pyx.so
 	$(RM) acados_sim_solver_pyx.o

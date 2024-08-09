@@ -33,23 +33,42 @@ import numpy as np
 from acados_template import latexify_plot
 
 
-def plot_pendulum(t, u_max, U, X_true, latexify=False, plt_show=True, time_label='$t$', x_labels=None, u_labels=None):
+def plot_diff_drive_trajectory(t, u_max, U, X_true, plt_show=True, time_label='$t$', x_labels=None, u_labels=None):
     """
     Params:
         t: time values of the discretization
-        u_max: maximum absolute value of u
+        u_max: maximum absolute value of u for visualization
+        U: arrray with shape (N_sim-1, nu) or (N_sim, nu)
+        X_true: arrray with shape (N_sim, nx)
+    """
+
+    # nx = X_true.shape[1]
+    # nu = U.shape[1]
+    fig, ax = plt.subplots()
+    ax.scatter(X_true[:, 0], X_true[:, 1], alpha=0.5)
+    # axes[0].grid()
+    ax.set_xlabel(f'$x$')
+    ax.set_ylabel(f'$y$')
+
+    plt.show()
+
+def plot_diff_drive(t, u_max, U, X_true, latexify=False, plt_show=True, time_label='$t$', x_labels=None, u_labels=None):
+    """
+    Params:
+        t: time values of the discretization
+        u_max: maximum absolute value of u for visualization
         U: arrray with shape (N_sim-1, nu) or (N_sim, nu)
         X_true: arrray with shape (N_sim, nx)
         latexify: latex style plots
     """
-
     if latexify:
         latexify_plot()
 
     nx = X_true.shape[1]
-    fig, axes = plt.subplots(nx+1, 1, sharex=True)
+    nu = U.shape[1]
+    fig, axes = plt.subplots(nx+nu, 1, sharex=True)
 
-    for i in range(nx):
+    for i in range(nx): # For each state
         axes[i].plot(t, X_true[:, i])
         axes[i].grid()
         if x_labels is not None:
@@ -57,19 +76,23 @@ def plot_pendulum(t, u_max, U, X_true, latexify=False, plt_show=True, time_label
         else:
             axes[i].set_ylabel(f'$x_{i}$')
 
-    axes[-1].step(t, np.append([U[0]], U))
+    # Make step plot in Last axes
+    for i in range(nu):
+        axes[nx+i].step(t, U[:, i])
 
-    if u_labels is not None:
-        axes[-1].set_ylabel(u_labels[0])
-    else:
-        axes[-1].set_ylabel('$u$')
+        if u_labels is not None:
+            axes[nx+i].set_ylabel(u_labels[i])
+        else:
+            axes[nx+i].set_ylabel(f'$u_{i}$')
 
-    axes[-1].hlines(u_max, t[0], t[-1], linestyles='dashed', alpha=0.7)
-    axes[-1].hlines(-u_max, t[0], t[-1], linestyles='dashed', alpha=0.7)
-    axes[-1].set_ylim([-1.2*u_max, 1.2*u_max])
-    axes[-1].set_xlim(t[0], t[-1])
+        axes[nx+i].hlines(u_max, t[0], t[-1], linestyles='dashed', alpha=0.7)
+        axes[nx+i].hlines(-u_max, t[0], t[-1], linestyles='dashed', alpha=0.7)
+        axes[nx+i].set_ylim([-1.2*u_max, 1.2*u_max])
+        axes[nx+i].set_xlim(t[0], t[-1])
+        axes[nx+i].grid()
+
     axes[-1].set_xlabel(time_label)
-    axes[-1].grid()
+
 
     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, hspace=0.4)
 

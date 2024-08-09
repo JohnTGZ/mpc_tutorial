@@ -61,8 +61,8 @@ def export_pendulum_ode_model() -> AcadosModel:
     # Derivative of system state x: x_dot
     x1_dot = SX.sym('x1_dot')
     theta_dot = SX.sym('theta_dot')
-    v1_dot = SX.sym('v1_dot')
-    dtheta_dot = SX.sym('dtheta_dot')
+    v1_dot = SX.sym('v1_dot')           # Horizontal acceleration of cart
+    dtheta_dot = SX.sym('dtheta_dot') # Angular acceleration of pendulum
 
     xdot = vertcat(x1_dot, theta_dot, v1_dot, dtheta_dot) 
 
@@ -73,14 +73,18 @@ def export_pendulum_ode_model() -> AcadosModel:
     sin_theta = sin(theta)
     denominator = M + m - m*cos_theta*cos_theta
 
-    # f_expl: explicit forces
+    # f_expl: explicit forces in the form xdot = f_expl(x, u)
     f_expl = vertcat(v1,
                      dtheta,
                      (-m*l*sin_theta*dtheta*dtheta + m*g*cos_theta*sin_theta+F)/denominator,
                      (-m*l*cos_theta*sin_theta*dtheta*dtheta + F*cos_theta+(M+m)*g*sin_theta)/(l*denominator)
                      )
+    # [ x_dot , 
+    #   theta_dot, 
+    #   x_ddot, 
+    #   theta_ddot]
 
-    # f_impl: implicit forces
+    # f_impl: implicit forces in the form f_impl(x, xdot, u, [z])
     f_impl = xdot - f_expl
 
     # Define the model
